@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<a th:href="@{/customer/create}">
+    Add new customer
+</a>
+<h1>Customers</h1>
+<form>
+    Search by first name:
+    <input name="s" type="text"/>
+    <input type="submit" value="Search"/>
+</form><br/>
+<div class="container">
+<table class="table table-hover">
+    <tr>
+        <th>ID</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Image</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        <th>View</th>
+    </tr>
+    <th:block th:each="customer : ${customers}">
+        <tr>
+            <td th:text="${customer.id}"></td>
+            <td th:text="${customer.firstName}"></td>
+            <td th:text="${customer.lastName}"></td>
+            <td><img th:src="@{'/i/'+ ${customer.getAvatar()}}" width="100"/></td>
+            <td><a th:href="@{/edit-customer/__${customer.id}__ }">Edit</a></td>
+            <td><a th:href="@{/delete-customer/__${customer.id}__ }">Delete</a></td>
+            <td><a th:href="@{/View-customer/__${customer.id}__ }">View</a></td>
+        </tr>
+    </th:block>
+</table>
+</div>
+</body>
+</html>
